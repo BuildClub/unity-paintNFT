@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/WalletLogin.unity
+    guid: cc28e1075e9584f1698219d041278648
   - enabled: 1
-    path: Assets/Web3Unity/Scenes/WebLogin.unity
+    path: Assets/WebLogin.unity
     guid: a1b2001e782bb47659732d7e2bcdc35f
   - enabled: 1
-    path: Assets/FreeDraw/ExampleDrawingScene.unity
+    path: Assets/ExampleDrawingScene.unity
     guid: 4ce4d4d4aeef2e54e97bb40827915db8
   m_configObjects: {}

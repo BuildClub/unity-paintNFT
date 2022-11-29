@@ -21,7 +21,11 @@ public class SetMetaData : MonoBehaviour
         {
             if (obj.Values != null && obj.Values.Count > 0)
             {
-                Debug.Log("Metadata set to: " + obj.Values[0].cid);
+                var cid = obj.Values[0].cid;
+                //Debug.Log("Metadata set to: " + cid);
+                var path = NFTstorage.Helper.GenerateGatewayPath(cid, NFTstorage.Constants.GatewaysSubdomain[0], true);
+                EventManager.OnMetadataUploaded.Invoke(path);
+                Debug.Log("Metadata is set to " + path);
             }
         }
         else

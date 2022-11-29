@@ -63,6 +63,7 @@ public class CameraCapture : MonoBehaviour
             if (value != null)
             {
                 var path = Helper.GenerateGatewayPath(value[0].cid, Constants.GatewaysSubdomain[0], true);
+                EventManager.OnImageUploaded.Invoke(path);
                 SetText(path);
             }
         }

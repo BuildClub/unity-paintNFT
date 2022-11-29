@@ -118,7 +118,10 @@ public class EVM
         string url = host + "/createMintNFTTransaction";
         using (UnityWebRequest webRequest = UnityWebRequest.Post(url, form))
         {
+            Debug.Log(url);
+            Debug.Log(form.data.ToString());
             await webRequest.SendWebRequest();
+            Debug.Log(System.Text.Encoding.UTF8.GetString(webRequest.downloadHandler.data));
             CreateMintModel.Root data = JsonUtility.FromJson<CreateMintModel.Root>(System.Text.Encoding.UTF8.GetString(webRequest.downloadHandler.data));
             Debug.Log("Data: " + JsonConvert.SerializeObject( data.response, Formatting.Indented ));
             return data.response;

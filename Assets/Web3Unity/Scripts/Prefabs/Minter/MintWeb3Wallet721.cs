@@ -7,17 +7,19 @@ namespace Web3Unity.Scripts.Prefabs.Minter
     public class MintWeb3Wallet721 : MonoBehaviour
     {
 
-        public string chain = "ethereum";
-        public string network = "goerli"; // mainnet ropsten kovan rinkeby goerli
-        public string account;
-        public string to = "0x7259E32e35cf880aEACfbD412E7F4Baa8606e04c";
-        public string cid721 = "f01559ae4021a47e26bc773587278f62a833f2a6117411afbc5a7855661936d1c";
-        public string chainId = "5";
-        public string type721 = "721";
-
+        private string chain = "ethereum";
+        private string network = "goerli"; // mainnet ropsten kovan rinkeby goerli
+        private string account;
+        private string to;
+        private string cid721 = "bafkzvzacdlxhaqsig3fboo3kjzshfb6rltxivrbnrqwy2euje7sq";
+        private string chainId = "5";
+        private string type721 = "721";
+        string contract = "0x741C3F3146304Aaf5200317cbEc0265aB728FE07";
+        
         public void Awake()
         {
             account = PlayerPrefs.GetString("Account");
+            to = PlayerPrefs.GetString("Account");
         }
 
         // Start is called before the first frame update
@@ -28,6 +30,24 @@ namespace Web3Unity.Scripts.Prefabs.Minter
             // connects to user's browser wallet (metamask) to send a transaction
             try
             {
+                if (nftResponse == null)
+                {
+                    Debug.LogError("nftResponse is null");
+                    return;
+                }
+
+                if (nftResponse.tx == null)
+                {
+                    Debug.LogError("nftResponse.tx is null");
+                    return;
+                }
+
+                Debug.Log($"tx.to = {nftResponse.tx.to}");
+                Debug.Log($"tx.value = {nftResponse.tx.value}");
+                Debug.Log($"tx.data = {nftResponse.tx.data}");
+                Debug.Log($"tx.gasLimit = {nftResponse.tx.gasLimit}");
+                Debug.Log($"tx.gasPrice = {nftResponse.tx.gasPrice}");
+
                 string response = await Web3Wallet.SendTransaction(chainId, nftResponse.tx.to, nftResponse.tx.value, nftResponse.tx.data, nftResponse.tx.gasLimit, nftResponse.tx.gasPrice);
                 print(response);
                 Debug.Log(response);
@@ -45,7 +65,13 @@ namespace Web3Unity.Scripts.Prefabs.Minter
                 // connects to user's browser wallet (metamask) to send a transaction
                 try
                 {
-                    string response = await Web3Wallet.SendTransaction(chainId, nftResponse.tx.to, nftResponse.tx.value, nftResponse.tx.data, nftResponse.tx.gasLimit, nftResponse.tx.gasPrice);
+                    Debug.Log($"tx.to = {nftResponse.tx.to}");
+                    Debug.Log($"tx.value = {nftResponse.tx.value}");
+                    Debug.Log($"tx.data = {nftResponse.tx.data}");
+                    Debug.Log($"tx.gasLimit = {nftResponse.tx.gasLimit}");
+                    Debug.Log($"tx.gasPrice = {nftResponse.tx.gasPrice}");
+
+                    string response = await Web3Wallet.SendTransaction(chainId, nftResponse.tx.to, nftResponse.tx.value, nftResponse.tx.data, 2100000.ToString(), 8000000000.ToString());
                     print(response);
                     Debug.Log(response);
                 } catch (Exception e) {

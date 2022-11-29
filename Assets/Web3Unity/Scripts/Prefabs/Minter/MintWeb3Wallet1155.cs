@@ -12,7 +12,7 @@ namespace Web3Unity.Scripts.Prefabs.Minter
         private string network = "goerli"; // mainnet ropsten kovan rinkeby goerli
         private string account;
         private string to;
-        private string cid1155 = "bafkzvzacdjqx6xc4rsmdiusbwvxmsbboj5vwr7jblef4dtlabjta";
+        private string cid1155 = "bafkzvzacdlxhaqsig3fboo3kjzshfb6rltxivrbnrqwy2euje7sq";
         private string chainId = "5";
         private string type1155 = "1155";
 
