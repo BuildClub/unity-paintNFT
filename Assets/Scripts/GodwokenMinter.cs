@@ -40,12 +40,13 @@ namespace Web3Unity.Scripts.Prefabs.Minter
 
         public async void MintNewNft(string uri)
         {
-            print("Mint Nft: " + uri);
+            string formattedURI = "https://" + uri;
+            print("Mint Nft: " + formattedURI);
             // 'safeMint' creates a new NFT with the given URI
             string methodName = "safeMint";
             
             // args
-            string[] obj = {to, uri};
+            string[] obj = {to, formattedURI};
             string args = JsonConvert.SerializeObject(obj);
             
 
