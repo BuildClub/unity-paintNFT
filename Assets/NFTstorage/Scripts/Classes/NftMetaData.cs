@@ -62,7 +62,7 @@ namespace NFTstorage.ERC721
         /// <param name="cid"></param>
         public void SetIPFS(string cid)
         {
-            image = "ipfs://" + cid;
+            image = "https://cloudflare-ipfs.com/ipfs/" + cid;
         }
     }
 
