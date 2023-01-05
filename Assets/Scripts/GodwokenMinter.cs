@@ -60,6 +60,23 @@ namespace Web3Unity.Scripts.Prefabs.Minter
 #endif
             print(response);
         }
+        
+        public async void BurnNFT(int tokenId)
+        {
+            // method in the smart contract
+            string methodName = "burn";
+            
+            // args
+            int[] obj = {tokenId};
+            string args = JsonConvert.SerializeObject(obj);
+                
+            // call (not a transaction so we pay no gas)
+            string response = await EVM.Call(chain, network, contractAddress, abi, methodName, args, rpc);
+            print(response);
+            
+            // callback for when the NFT has been burned
+            EventManager.OnNftBurned.Invoke();
+        }
 
         public async Task<int> GetNumberOfNfts()
         {
