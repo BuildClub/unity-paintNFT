@@ -81,17 +81,17 @@ namespace Web3Unity.Scripts.Prefabs.Minter
             return 0;
         }
 
-        public async void GetNfts()
+        public async Task<List<int>> GetTokenIds()
         {
             // get the number of nfts owned
             int numberOfNFTs = await GetNumberOfNfts();
             if (numberOfNFTs == 0)
             {
-                return;
+                return null;
             }
             
             string methodName = "tokenOfOwnerByIndex";
-
+            
             // for every nft get the id
             List<int> tokenIds = new List<int>();
             for (int index = 0; index < numberOfNFTs; index++)
@@ -110,8 +110,22 @@ namespace Web3Unity.Scripts.Prefabs.Minter
                 }
             }
 
+            return tokenIds;
+        }
+
+        public async void GetNfts()
+        {
+            // get the number of nfts owned
+            int numberOfNFTs = await GetNumberOfNfts();
+            if (numberOfNFTs == 0)
+            {
+                return;
+            }
+
+            List<int> tokenIds = await GetTokenIds();
+            
             // for every id get the uri
-            methodName = "tokenURI";
+            string methodName = "tokenURI";
             List<string> uris = new List<string>();
             foreach (int tokenId in tokenIds)
             {
